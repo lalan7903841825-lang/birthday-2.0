@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Birthday Surprise</title>
+
+<style>
+body{
+margin:0;
+font-family:Arial;
+background:linear-gradient(135deg,#ff6a88,#ff99ac);
+color:white;
+text-align:center;
+overflow-x:hidden;
+}
+
+#intro{
+position:fixed;
+width:100%;
+height:100%;
+background:black;
+display:flex;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+z-index:10;
+}
+
+#intro button{
+padding:15px 30px;
+font-size:20px;
+background:#ff4081;
+border:none;
+border-radius:10px;
+color:white;
+cursor:pointer;
+}
+
+h1{
+font-size:45px;
+text-shadow:0 0 20px white;
+}
+
+.tab{
+background:#222;
+padding:10px;
+}
+
+.tab button{
+background:#444;
+border:none;
+color:white;
+padding:10px 20px;
+margin:5px;
+font-size:18px;
+border-radius:10px;
+cursor:pointer;
+}
+
+.tabcontent{
+display:none;
+padding:30px;
+}
+
+img{
+width:300px;
+border-radius:20px;
+box-shadow:0 0 20px black;
+}
+
+#slideshow{
+position:relative;
+height:350px;
+}
+
+#slideshow img{
+position:absolute;
+left:50%;
+transform:translateX(-50%);
+opacity:0;
+transition:1s;
+}
+
+#slideshow img.active{
+opacity:1;
+}
+
+.balloon{
+position:absolute;
+bottom:-150px;
+width:40px;
+height:50px;
+border-radius:50%;
+animation:float 8s infinite;
+}
+
+@keyframes float{
+0%{transform:translateY(0)}
+100%{transform:translateY(-1000px)}
+}
+
+.firework{
+position:absolute;
+width:6px;
+height:6px;
+background:white;
+border-radius:50%;
+animation:boom 1s linear infinite;
+}
+
+@keyframes boom{
+0%{transform:scale(1);opacity:1}
+100%{transform:scale(10);opacity:0}
+}
+
+button{
+padding:12px 20px;
+font-size:18px;
+border:none;
+border-radius:10px;
+cursor:pointer;
+background:#ffd60a;
+margin-top:20px;
+}
+
+.cakebox{
+position:relative;
+display:inline-block;
+}
+
+.cake{
+width:320px;
+border-radius:20px;
+}
+
+.cakephoto{
+position:absolute;
+top:70px;
+left:50%;
+transform:translateX(-50%);
+width:120px;
+border-radius:10px;
+border:3px solid white;
+}
+</style>
+
+<script>
+function start(){
+document.getElementById("intro").style.display="none"
+}
+
+function tab(x){
+let t=document.getElementsByClassName("tabcontent")
+for(let i=0;i<t.length;i++){
+t[i].style.display="none"
+}
+document.getElementById(x).style.display="block"
+}
+
+let index=-1
+
+function slide(){
+let slides=document.querySelectorAll("#slideshow img")
+slides.forEach(s=>s.classList.remove("active"))
+index++
+if(index>=slides.length) index=0
+slides[index].classList.add("active")
+setTimeout(slide,2000)
+}
+
+function cakeCut(){
+alert("🎂 Cake Cut! Happy Birthday 🎉")
+}
+
+window.onload=slide
+</script>
+
+</head>
+
+<body>
+
+<div id="intro">
+<h1>🎁 Birthday Surprise</h1>
+<button onclick="start()">Open Surprise</button>
+</div>
+
+<h1>🎂 Happy Birthday 🎂</h1>
+
+<div class="tab">
+<button onclick="tab('wish')">Wish</button>
+<button onclick="tab('gallery')">Gallery</button>
+<button onclick="tab('cake')">Cake</button>
+</div>
+
+<div id="wish" class="tabcontent" style="display:block">
+<h2 id="type"></h2>
+<p>May your life be full of happiness and success.</p>
+<button onclick="document.getElementById('music').play()">Play Music</button>
+</div>
+
+<div id="gallery" class="tabcontent">
+<h2>Photo Gallery</h2>
+<div id="slideshow">
+<img src="photo1.jpg" class="active">
+<img src="anime.webp">
+<img src="photo3.jpg">
+<img src="photo4.jpg">
+<img src="photo5.jpeg">
+</div>
+</div>
+
+<div id="cake" class="tabcontent">
+<h2>Birthday Cake 🎂</h2>
+<div class="cakebox">
+<img src="cake.jpg" class="cake">
+<img src="cake.jpg" class="cakephoto">
+</div>
+<br>
+<button onclick="cakeCut()">Cut Cake</button>
+</div>
+
+<audio id="music" loop>
+<source src="Dil Ka Telephone - Full Video  Dream Girl  Ayushmann Khurrana  Jonita Gandhi & Nakash Aziz.mp3">
+</audio>
+
+<div class="balloon" style="left:10%;background:red"></div>
+<div class="balloon" style="left:30%;background:yellow"></div>
+<div class="balloon" style="left:50%;background:blue"></div>
+<div class="balloon" style="left:70%;background:green"></div>
+<div class="balloon" style="left:90%;background:pink"></div>
+
+<div class="firework" style="top:20%;left:40%"></div>
+<div class="firework" style="top:30%;left:60%"></div>
+<div class="firework" style="top:50%;left:30%"></div>
+
+</body>
+</html>
